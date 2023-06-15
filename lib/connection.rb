@@ -35,8 +35,8 @@ module QNE
       @default_tax_code ||= QNE::DefaultTaxCode.new(connection).call
     end
 
-    def sales_invoces
-      @sales_invoces ||= QNE::SalesInvoices.new(connection)
+    def sales_invoices
+      @sales_invoices ||= QNE::SalesInvoices.new(connection)
     end
 
     def sales_orders
