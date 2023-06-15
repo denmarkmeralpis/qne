@@ -204,6 +204,48 @@ sales_invoice_hash = {
 conn.sales_invoices.create(sales_invoice_hash)
 ```
 
+**4. Update a sales invoice:**
+
+```ruby
+sales_invoice_hash = {
+  id: "xxxxxxxxx",
+  address1: "Updated address",
+  address2: "Updated address2",
+  address3: "CAMARINES SUR",
+  attention: "John Doe",
+  customer: "xxxxxxxxxx",
+  details: [
+    {
+      dateRef1: "2023-06-07T01:19:37.167Z",
+      description: "Product X",
+      numbering: "1",
+      project: "PROJECT A",
+      qty: 5,
+      stock: "9999",
+      stockLocation: "LOCATION_CODE",
+      unitPrice: "17.5",
+      uom: "piece"
+    }
+  ],
+  doAddress1: "Updated address",
+  doAddress2: "San Antonio/MILAOR",
+  doAddress3: "CAMARINES SUR",
+  doContact: "John Doe",
+  doPhone: "09999999999",
+  invoiceDate: "2023-06-07T01:19:37.167Z",
+  invoiceTo: "Doe Store",
+  phone: "09999999999",
+  project: "PROJECT A",
+  referenceNo: "R9999-9-9",
+  remark1: "PM1",
+  stockLocation: "LOCATION CODE",
+  title: "PICKER NAME",
+  title2: "CHECKER NAME"
+}
+
+conn.sales_invoices.update(sales_invoice_hash)
+```
+
 ### Sales Orders
 
 **1. Fetch all sales orders**
