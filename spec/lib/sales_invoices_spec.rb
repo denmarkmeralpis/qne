@@ -45,5 +45,19 @@ module QNE
         expect(conn.sales_invoices.create(somekey: :value_pair)).to be_a(Hash)
       end
     end
+
+    describe '#update' do
+      before do
+        mock = instance_double(QNE::SalesInvoice::Update)
+        resp = OpenStruct.new(body: { id: '123' }.to_json)
+
+        allow(QNE::SalesInvoice::Update).to receive(:new).and_return(mock)
+        allow(mock).to receive(:call).and_return(resp)
+      end
+
+      it 'returns object hash' do
+        expect(conn.sales_invoices.update(somekey: :value_pair)).to be_a(Hash)
+      end
+    end
   end
 end

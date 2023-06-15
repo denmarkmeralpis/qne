@@ -3,6 +3,7 @@
 require_relative 'QNE/sales_invoice/all'
 require_relative 'QNE/sales_invoice/show'
 require_relative 'QNE/sales_invoice/create'
+require_relative 'QNE/sales_invoice/update'
 
 module QNE
   class SalesInvoices < Base
@@ -26,6 +27,14 @@ module QNE
 
     def create(request_body)
       @response = QNE::SalesInvoice::Create.new(
+        conn, request_body: request_body
+      ).call
+
+      parse_to_json(@response.body)
+    end
+
+    def update(request_body)
+      @response = QNE::SalesInvoice::Update.new(
         conn, request_body: request_body
       ).call
 
