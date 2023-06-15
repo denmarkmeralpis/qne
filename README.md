@@ -160,7 +160,7 @@ TODO:
 conn.sales_orders.all
 ```
 
-**2. Get a sales order by attribute(s):**
+**2. View a specific sales order:**
 
 ```ruby
 conn.sales_orders.show('xxx-xxx-xxx')
