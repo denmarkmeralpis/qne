@@ -52,7 +52,7 @@ module QNE
     end
 
     def stock_locations
-      @stock_locations ||= QNE::StockLocation.new(connection)
+      @stock_locations ||= QNE::StockLocations.new(connection)
     end
   end
 end
