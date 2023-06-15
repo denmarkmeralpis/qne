@@ -1,8 +1,6 @@
 # QNE
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/QNE`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A ruby wrapper for QNE APIs.
 
 ## Installation
 
@@ -36,10 +34,11 @@ conn.customers.all(top: 10) # returns top 10 customers
 
 1. [Filters](#filters)
 2. List of available APIs:
-   - [Customers](#customers)
-   - [Customer Categories](#customer-categories)
-   - [Sales Invoices](#sales-invoices)
-   - [Sales Orders](#sales-orders)
+   - [Customers](#Customers)
+   - [Customer Categories](#Customer-Cetegories)
+   - [Default Tax Code](#Default-Tax-Code)
+   - [Sales Invoices](#Sales-Invoice)
+   - [Sales Orders](#Sales-Orders)
    - [Stocks](#stocks)
    - [Stock Locations](#stock-location)
    - [Terms](#terms)
@@ -135,6 +134,115 @@ customer_hash = {
 
 conn.customers.update(customer_hash)
 ```
+
+### Customer Categories
+
+**1. Fetch all customer categories**
+
+```ruby
+conn.customer_categories.all
+```
+
+### Default Tax Code
+
+```ruby
+conn.default_tax_code
+```
+
+### Sales Invoices
+TODO:
+
+### Sales Orders
+
+**1. Fetch all sales orders**
+
+```ruby
+conn.sales_orders.all
+```
+
+**2. Get a sales order by attribute(s):**
+
+```ruby
+conn.sales_orders.show('xxx-xxx-xxx')
+```
+
+**3. Create a sales order:**
+
+```ruby
+sales_order_hash = {
+  address1: "Zone 9, San Antonio, MILAOR, CAMARINES SUR",
+  address2: "San Antonio/MILAOR",
+  address3: "CAMARINES SUR",
+  attention: "John Doe",
+  customer: "customer-id-123",
+  customerName: "Doe Store",
+  details: [
+    {
+      description: "Product Name",
+      qty: "5",
+      stock: "1495992",
+      unitPrice: "17.5",
+      uom: "piece"
+    }
+  ],
+  doAddress1: "Zone 9, San Antonio, MILAOR, CAMARINES SUR",
+  doAddress2: "San Antonio/MILAOR",
+  doAddress3: "CAMARINES SUR",
+  doContact: "John Doe",
+  doPhone: "09999999999",
+  isApproved: true,
+  isCancelled: false,
+  isTaxInclusive: true,
+  orderDate: "2023-06-01T01:19:37.167Z",
+  phone: "09999999999",
+  referenceNo: "R99999-9-9",
+  remark1: "",
+  project: "PROJECT NAME",
+  stockLocation: "STOCK CODE"
+}
+
+conn.sales_orders.create(sales_order_hash)
+```
+
+### Stocks
+
+**1. Fetch all stocks**
+
+```ruby
+conn.stocks.all
+```
+
+**2. Fetch all UOMs of a specific stock**
+
+```ruby
+conn.stocks.find_by_id('stock-id')
+```
+
+### Stock Locations
+
+**1. Fetch all stock locations**
+
+```ruby
+conn.stock_locations.all
+```
+
+_Note: No `filters` and `queries` for this specific action._
+
+### Terms
+
+**1. Fetch all terms**
+
+```ruby
+conn.terms.all
+```
+
+**2. Get a term by attribute(s):**
+
+```ruby
+conn.terms.show('id')
+```
+
+
 
 ## Development
 
