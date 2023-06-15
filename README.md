@@ -246,6 +246,16 @@ sales_invoice_hash = {
 conn.sales_invoices.update(sales_invoice_hash)
 ```
 
+**5. Generate sales invoice download link**
+
+There are two types of downloadable links:
+1. `tax_invoice`
+2. `sales_invoice` (default)
+
+```ruby
+conn.sales_invoices.download('id-of-sales-invoice', 'tax_invoice')
+```
+
 ### Sales Orders
 
 **1. Fetch all sales orders**
