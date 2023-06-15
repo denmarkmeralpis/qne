@@ -3,6 +3,7 @@
 require_relative 'customers'
 require_relative 'customer_categories'
 require_relative 'default_tax_code'
+require_relative 'sales_invoices'
 require_relative 'sales_orders'
 require_relative 'stocks'
 require_relative 'stock_locations'
@@ -32,6 +33,10 @@ module QNE
 
     def default_tax_code
       @default_tax_code ||= QNE::DefaultTaxCode.new(connection).call
+    end
+
+    def sales_invoces
+      @sales_invoces ||= QNE::SalesInvoices.new(connection)
     end
 
     def sales_orders
