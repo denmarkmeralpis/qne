@@ -150,7 +150,59 @@ conn.default_tax_code
 ```
 
 ### Sales Invoices
-TODO:
+
+**1. Fetch all sales invoices**
+
+```ruby
+conn.sales_invoices.all
+```
+
+**2. View a specific sales invoice:**
+
+```ruby
+conn.sales_invoices.show('xxx-xxx-xxx')
+```
+
+**3. Create a sales invoice:**
+
+```ruby
+sales_invoice_hash = {
+  address1: "Zone 2, San Antonio, MILAOR, CAMARINES SUR",
+  address2: "San Antonio/MILAOR",
+  address3: "CAMARINES SUR",
+  attention: "John Doe",
+  customer: "xxxxxxxxxx",
+  details: [
+    {
+      dateRef1: "2023-06-07T01:19:37.167Z",
+      description: "Product X",
+      numbering: "1",
+      project: "PROJECT A",
+      qty: 5,
+      stock: "9999",
+      stockLocation: "LOCATION_CODE",
+      unitPrice: "17.5",
+      uom: "piece"
+    }
+  ],
+  doAddress1: "Zone 2, San Antonio, MILAOR, CAMARINES SUR",
+  doAddress2: "San Antonio/MILAOR",
+  doAddress3: "CAMARINES SUR",
+  doContact: "John Doe",
+  doPhone: "09999999999",
+  invoiceDate: "2023-06-07T01:19:37.167Z",
+  invoiceTo: "Doe Store",
+  phone: "09999999999",
+  project: "PROJECT A",
+  referenceNo: "R9999-9-9",
+  remark1: "PM1",
+  stockLocation: "LOCATION CODE",
+  title: "PICKER NAME",
+  title2: "CHECKER NAME"
+}
+
+conn.sales_invoices.create(sales_invoice_hash)
+```
 
 ### Sales Orders
 
@@ -226,7 +278,7 @@ conn.stocks.find_by_id('stock-id')
 conn.stock_locations.all
 ```
 
-_Note: No `filters` and `queries` for this specific action._
+_Note: `filters` and `queries` won't work for this specific action._
 
 ### Terms
 
