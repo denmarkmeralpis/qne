@@ -6,10 +6,8 @@ module QNE
   class StockLocations < Base
     include ::QNE::QueryBuilder
 
-    def all(params = {})
-      @response = QNE::StockLocation::All.new(
-        conn, params: uri_query(params)
-      ).call
+    def all
+      @response = QNE::StockLocation::All.new(conn).call
 
       parse_to_json(@response.body)
     end
