@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'webmock/rspec'
 
 module QNE
-  module Customer
+  module SalesInvoice
     RSpec.describe Update do
       describe '#call' do
         let(:conn) { QNE::Connection.new(db_code: 'dbcode') }
