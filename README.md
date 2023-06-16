@@ -99,7 +99,7 @@ customer_hash = {
     companyName: "DEN - (ABELLA NAGA CITY)",
     companyName2: "DEN IBARRA",
     controlAccount: "xxx-xxx-xxx",
-    category: "T2 SARI-SARI",
+    category: "CATEGORY A",
     address1: "AL3 ABELLA NAGA CITY CAMARINES SUR",
     address2: "ABELLA",
     address3: "NAGA CITY/CAMARINES SUR",
