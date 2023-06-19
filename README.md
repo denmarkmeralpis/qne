@@ -122,6 +122,13 @@ conn.customers.create(customer_hash)
 conn.customers.show('id-of-the-customer')
 ```
 
+you can also do:
+
+```ruby
+customer = conn.customers.find('id-of-the customer')
+customer.show
+```
+
 **5. Update customer details**
 
 ```ruby
