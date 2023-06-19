@@ -88,7 +88,7 @@ conn.customers.all
 **2. Get a customer by attribute(s):**
 
 ```ruby
-conn.customers.find_by(id: 'xxx-xxx-xxx', status: 'ACTIVE')
+conn.customers.find_by(phoneNo1: '09123456789', status: 'ACTIVE')
 ```
 
 **3. Create a customer:**
@@ -326,7 +326,21 @@ conn.stocks.all
 **2. Fetch all UOMs of a specific stock**
 
 ```ruby
-conn.stocks.find_by_id('stock-id')
+stock = conn.stocks.find('stock-id')
+stock.uoms
+```
+
+or
+
+```ruby
+conn.stocks.find_uoms_by_id('stock-id')
+```
+
+**3. View specific stock**
+
+```ruby
+stock = conn.stocks.find('stock-id')
+stock.show
 ```
 
 ### Stock Locations
