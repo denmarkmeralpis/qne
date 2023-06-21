@@ -13,5 +13,11 @@ module QNE
     def parse_to_json(respose_body)
       JSON.parse(respose_body)
     end
+
+    def success?
+      return false unless response
+
+      response.success?
+    end
   end
 end

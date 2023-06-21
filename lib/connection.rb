@@ -7,6 +7,7 @@ require_relative 'sales_invoices'
 require_relative 'sales_orders'
 require_relative 'stocks'
 require_relative 'stock_locations'
+require_relative 'system_version'
 require_relative 'terms'
 
 module QNE
@@ -53,6 +54,16 @@ module QNE
 
     def stock_locations
       @stock_locations ||= QNE::StockLocations.new(connection)
+    end
+
+    def system_version
+      @system_version ||= QNE::SystemVersion.new(connection).call
+    end
+
+    def authenticated?
+      qne = QNE::SystemVersion.new(connection)
+      qne.call
+      qne.success?
     end
   end
 end
