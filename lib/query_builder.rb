@@ -10,7 +10,8 @@ module QNE
     def multi_query(queries)
       filters = queries.map do |column, operators|
         operators.map do |operator, value|
-          "#{column} #{operator} '#{value}'"
+          value = value.is_a?(String) ? "'#{value}'" : value
+          "#{column} #{operator} #{value}"
         end
       end
 
