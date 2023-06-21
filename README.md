@@ -32,6 +32,12 @@ then you can use it to perform desired operation
 conn.customers.all(top: 10) # returns top 10 customers
 ```
 
+you can also check if the `db_code` is valid:
+
+```ruby
+conn.authenticated?
+```
+
 1. [Filters](#filters)
 2. List of available APIs:
    - [Customers](#Customers)
