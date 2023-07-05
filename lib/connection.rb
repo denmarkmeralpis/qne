@@ -9,6 +9,7 @@ require_relative 'stocks'
 require_relative 'stock_locations'
 require_relative 'system_version'
 require_relative 'terms'
+require_relative 'uoms'
 
 module QNE
   class Connection
@@ -22,6 +23,16 @@ module QNE
         url: BASE_URI,
         headers: { 'DbCode' => @db_code }
       )
+    end
+
+    def system_version
+      @system_version ||= QNE::SystemVersion.new(connection).call
+    end
+
+    def authenticated?
+      qne = QNE::SystemVersion.new(connection)
+      qne.call
+      qne.success?
     end
 
     def customers
@@ -56,14 +67,8 @@ module QNE
       @stock_locations ||= QNE::StockLocations.new(connection)
     end
 
-    def system_version
-      @system_version ||= QNE::SystemVersion.new(connection).call
-    end
-
-    def authenticated?
-      qne = QNE::SystemVersion.new(connection)
-      qne.call
-      qne.success?
+    def uoms
+      @uoms ||= QNE::UOMs.new(connection)
     end
   end
 end
