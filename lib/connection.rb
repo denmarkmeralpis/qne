@@ -10,6 +10,7 @@ require_relative 'stock_locations'
 require_relative 'system_version'
 require_relative 'terms'
 require_relative 'uoms'
+require_relative 'tax_codes'
 
 module QNE
   class Connection
@@ -69,6 +70,10 @@ module QNE
 
     def uoms
       @uoms ||= QNE::UOMs.new(connection)
+    end
+
+    def tax_codes
+      @tax_codes ||= QNE::TaxCodes.new(connection)
     end
   end
 end

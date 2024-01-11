@@ -81,6 +81,7 @@ GEM
 
 PLATFORMS
   -darwin-20
+  ruby
 
 DEPENDENCIES
   QNE!
