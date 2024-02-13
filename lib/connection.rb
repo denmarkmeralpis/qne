@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'agents'
 require_relative 'customers'
 require_relative 'customer_categories'
 require_relative 'default_tax_code'
@@ -34,6 +35,10 @@ module QNE
       qne = QNE::SystemVersion.new(connection)
       qne.call
       qne.success?
+    end
+
+    def agents
+      @agents ||= QNE::Agents.new(connection)
     end
 
     def customers
