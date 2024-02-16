@@ -21,20 +21,14 @@ module QNE
 
     def initialize(db_code:)
       @db_code = db_code || ENV['QNE_DB_CODE']
-      @connection = Faraday.new(
-        url: BASE_URI,
-        headers: { 'DbCode' => @db_code }
-      )
+      @faraday_params = { url: BASE_URI, headers: { 'DbCode' => @db_code } }
+      @connection = Faraday.new(@faraday_params) do |config|
+        config.adapter :net_http_persistent
+      end
     end
 
     def system_version
       @system_version ||= QNE::SystemVersion.new(connection).call
-    end
-
-    def authenticated?
-      qne = QNE::SystemVersion.new(connection)
-      qne.call
-      qne.success?
     end
 
     def agents
@@ -79,6 +73,20 @@ module QNE
 
     def tax_codes
       @tax_codes ||= QNE::TaxCodes.new(connection)
+    end
+
+    def connected?
+      authenticated?
+    end
+
+    def authenticated?
+      conn = Faraday.new(@faraday_params) do |config|
+        config.options.timeout = ENV.fetch('QNE_TEST_CONNECTION_TIMEOUT', 10)
+      end
+
+      qne = QNE::SystemVersion.new(conn)
+      qne.call
+      qne.success?
     end
   end
 end
