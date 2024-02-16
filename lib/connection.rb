@@ -76,15 +76,17 @@ module QNE
     end
 
     def connected?
-      authenticated?
+      conn = Faraday.new(@faraday_params) do |config|
+        config.options.timeout = ENV.fetch('QNE_TEST_CONNECTION_TIMEOUT', 5)
+      end
+
+      QNE::SystemVersion.new(conn).call
+    rescue Faraday::TimeoutError
+      false
     end
 
     def authenticated?
-      conn = Faraday.new(@faraday_params) do |config|
-        config.options.timeout = ENV.fetch('QNE_TEST_CONNECTION_TIMEOUT', 10)
-      end
-
-      qne = QNE::SystemVersion.new(conn)
+      qne = QNE::SystemVersion.new(connection)
       qne.call
       qne.success?
     end

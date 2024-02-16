@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    QNE (1.0.0)
+    QNE (0.2.0)
       faraday (~> 1.10)
       faraday-net_http_persistent (~> 1.2)
       net-http-persistent (~> 4.0)
