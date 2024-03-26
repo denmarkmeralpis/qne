@@ -18,12 +18,9 @@ module QNE
   class Connection
     BASE_URI = 'https://dev-api.qne.cloud'.freeze
 
-    attr_reader :api_token, :token_expiration
-
-    def initialize(db_code:, username: nil, password: nil)
-      @db_code = db_code || ENV['QNE_DB_CODE']
-      @username = username
-      @password = password
+    def initialize(options = {})
+      @db_code = options.fetch(:db_code, nil) || ENV['QNE_DB_CODE']
+      @api_token = options.fetch(:api_token, nil)
     end
 
     def system_version
@@ -102,16 +99,8 @@ module QNE
 
     private
 
-    def auth_method
-      if @username.nil? || @password.nil?
-        dbcode_auth
-      else
-        bearer_auth
-      end
-    end
-
     def faraday_params
-      @faraday_params ||= auth_method
+      @faraday_params ||= @api_token ? bearer_auth : dbcode_auth
     end
 
     def dbcode_auth
@@ -127,33 +116,9 @@ module QNE
       @bearer_auth ||= {
         url: BASE_URI,
         headers: {
-          'Authorization' => "Bearer #{fetch_api_token}"
+          'Authorization' => "Bearer #{@api_token}"
         }
       }
-    end
-
-    def fetch_api_token
-      return @api_token if valid_token?
-
-      reqs = users
-      resp = reqs.login(
-        db_code: @db_code,
-        username: @username,
-        password: @password
-      )
-
-      if reqs.success?
-        @api_token = resp['token']
-        @token_expiration = Date.parse(resp['expiration'])
-
-        return @api_token
-      else
-        raise QNE::UnathorizedError
-      end
-    end
-
-    def valid_token?
-      api_token && token_expiration > Date.today
     end
   end
 end
