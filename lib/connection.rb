@@ -12,19 +12,18 @@ require_relative 'system_version'
 require_relative 'terms'
 require_relative 'uoms'
 require_relative 'tax_codes'
+require_relative 'users'
 
 module QNE
   class Connection
     BASE_URI = 'https://dev-api.qne.cloud'.freeze
 
-    attr_reader :connection
+    attr_reader :api_token, :token_expiration
 
-    def initialize(db_code:)
+    def initialize(db_code:, username: nil, password: nil)
       @db_code = db_code || ENV['QNE_DB_CODE']
-      @faraday_params = { url: BASE_URI, headers: { 'DbCode' => @db_code } }
-      @connection = Faraday.new(@faraday_params) do |config|
-        config.adapter :net_http_persistent
-      end
+      @username = username
+      @password = password
     end
 
     def system_version
@@ -75,6 +74,10 @@ module QNE
       @tax_codes ||= QNE::TaxCodes.new(connection)
     end
 
+    def users
+      @users ||= QNE::Users.new(Faraday.new(url: BASE_URI))
+    end
+
     def connected?
       conn = Faraday.new(@faraday_params) do |config|
         config.options.timeout = ENV.fetch('QNE_TEST_CONNECTION_TIMEOUT', 5)
@@ -89,6 +92,68 @@ module QNE
       qne = QNE::SystemVersion.new(connection)
       qne.call
       qne.success?
+    end
+
+    private
+
+    def connection
+      @connection ||= Faraday.new(faraday_params) do |config|
+        config.adapter :net_http_persistent
+      end
+    end
+
+    def auth_method
+      if @username.nil? || @password.nil?
+        dbcode_auth
+      else
+        bearer_auth
+      end
+    end
+
+    def faraday_params
+      @faraday_params ||= auth_method
+    end
+
+    def dbcode_auth
+      @dbcode_auth ||= {
+        url: BASE_URI,
+        headers: {
+          'DbCode' => @db_code
+        }
+      }
+    end
+
+    def bearer_auth
+      @bearer_auth ||= {
+        url: BASE_URI,
+        headers: {
+          'Authorization' => "Bearer #{fetch_api_token}"
+        }
+      }
+    end
+
+    def fetch_api_token
+      return @api_token if valid_token?
+
+      reqs = users
+      resp = reqs.login(
+        db_code: @db_code,
+        username: @username,
+        password: @password
+      )
+
+      if reqs.success?
+        @api_token = resp['token']
+        @token_expiration = Date.parse(resp['expiration'])
+
+        return @api_token
+      else
+        raise QNE::UnathorizedError
+      end
+    end
+
+    def valid_token?
+      api_token && token_expiration > Date.today
     end
   end
 end

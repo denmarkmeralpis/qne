@@ -10,4 +10,6 @@ require_relative 'connection'
 module QNE
   class Error < StandardError; end
   # Your code goes here...
+
+  class UnathorizedError < Error; end
 end
