@@ -94,13 +94,13 @@ module QNE
       qne.success?
     end
 
-    private
-
     def connection
       @connection ||= Faraday.new(faraday_params) do |config|
         config.adapter :net_http_persistent
       end
     end
+
+    private
 
     def auth_method
       if @username.nil? || @password.nil?
