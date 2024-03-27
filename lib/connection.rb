@@ -76,11 +76,11 @@ module QNE
     end
 
     def connected?
-      conn = Faraday.new(@faraday_params) do |config|
-        config.options.timeout = ENV.fetch('QNE_TEST_CONNECTION_TIMEOUT', 5)
-      end
+      # conn = Faraday.new(@faraday_params) do |config|
+      #   config.options.timeout = ENV.fetch('QNE_TEST_CONNECTION_TIMEOUT', 5)
+      # end
 
-      QNE::SystemVersion.new(conn).call
+      QNE::SystemVersion.new(connection).call
     rescue Faraday::TimeoutError
       false
     end
@@ -92,10 +92,14 @@ module QNE
     end
 
     def connection
-      @connection ||= Faraday.new(faraday_params) do |config|
-        config.adapter :net_http_persistent
-      end
+      @connection ||= Faraday.new(faraday_params)
     end
+
+    # def connection
+    #   @connection ||= Faraday.new(faraday_params) do |config|
+    #     config.adapter :net_http_persistent
+    #   end
+    # end
 
     private
 
