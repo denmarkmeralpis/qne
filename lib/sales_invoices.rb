@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'QNE/sales_invoice/find_by'
 require_relative 'QNE/sales_invoice/all'
 require_relative 'QNE/sales_invoice/show'
 require_relative 'QNE/sales_invoice/create'
@@ -9,6 +10,16 @@ require_relative 'QNE/sales_invoice/download'
 module QNE
   class SalesInvoices < Base
     include ::QNE::QueryBuilder
+
+    def find_by(params)
+      @response = QNE::SalesInvoice::FindBy.new(
+        conn, params: eq_query(params)
+      ).call
+
+      body = parse_to_json(@response.body)
+
+      @response.success? ? body.first : body
+    end
 
     def all(params = {})
       @response = QNE::SalesInvoice::All.new(
