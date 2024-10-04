@@ -102,6 +102,14 @@ module QNE
 
     private
 
+    def faraday_params
+      @faraday_params ||= {
+        url: BASE_URI,
+        headers: auth_method,
+        request: request_options
+      }
+    end
+
     def auth_method
       if @username.nil? || @password.nil?
         dbcode_auth
@@ -110,25 +118,18 @@ module QNE
       end
     end
 
-    def faraday_params
-      @faraday_params ||= auth_method
-    end
-
     def dbcode_auth
-      @dbcode_auth ||= {
-        url: BASE_URI,
-        headers: {
-          'DbCode' => @db_code
-        }
-      }
+      { 'DbCode' => @db_code }
     end
 
     def bearer_auth
-      @bearer_auth ||= {
-        url: BASE_URI,
-        headers: {
-          'Authorization' => "Bearer #{fetch_api_token}"
-        }
+      { 'Authorization' => "Bearer #{fetch_api_token}" }
+    end
+
+    def request_options
+      {
+        read_timeout: ENV.fetch('FARADAY_READ_TIMEOUT', '60').to_i,
+        timeout: ENV.fetch('FARADAY_TIMEOUT', '60').to_i
       }
     end
 
