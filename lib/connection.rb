@@ -76,10 +76,6 @@ module QNE
     end
 
     def connected?
-      # conn = Faraday.new(@faraday_params) do |config|
-      #   config.options.timeout = ENV.fetch('QNE_TEST_CONNECTION_TIMEOUT', 5)
-      # end
-
       QNE::SystemVersion.new(connection).call
     rescue Faraday::TimeoutError
       false
@@ -95,33 +91,32 @@ module QNE
       @connection ||= Faraday.new(faraday_params)
     end
 
-    # def connection
-    #   @connection ||= Faraday.new(faraday_params) do |config|
-    #     config.adapter :net_http_persistent
-    #   end
-    # end
-
     private
 
     def faraday_params
-      @faraday_params ||= @api_token ? bearer_auth : dbcode_auth
-    end
-
-    def dbcode_auth
-      @dbcode_auth ||= {
+      @faraday_params ||= {
         url: BASE_URI,
-        headers: {
-          'DbCode' => @db_code
-        }
+        headers: auth_method,
+        request: request_options
       }
     end
 
+    def auth_method
+      @api_token ? bearer_auth : dbcode_auth
+    end
+
+    def dbcode_auth
+      { 'DbCode' => @db_code }
+    end
+
     def bearer_auth
-      @bearer_auth ||= {
-        url: BASE_URI,
-        headers: {
-          'Authorization' => "Bearer #{@api_token}"
-        }
+      { 'Authorization' => "Bearer #{@api_token}" }
+    end
+
+    def request_options
+      {
+        read_timeout: ENV.fetch('FARADAY_READ_TIMEOUT', '60').to_i,
+        timeout: ENV.fetch('FARADAY_TIMEOUT', '60').to_i
       }
     end
   end
