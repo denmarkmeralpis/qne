@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "QNE"
+require 'ostruct'
+require 'byebug'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

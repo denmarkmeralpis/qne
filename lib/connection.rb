@@ -18,9 +18,11 @@ module QNE
   class Connection
     BASE_URI = 'https://dev-api.qne.cloud'.freeze
 
-    def initialize(options = {})
+    # You can provide your own block before executing retry function
+    def initialize(options = {}, &retry_block)
       @db_code = options.fetch(:db_code, nil) || ENV['QNE_DB_CODE']
       @api_token = options.fetch(:api_token, nil)
+      @retry_block = retry_block
     end
 
     def system_version
@@ -88,7 +90,10 @@ module QNE
     end
 
     def connection
-      @connection ||= Faraday.new(faraday_params)
+      @connection ||= Faraday.new(faraday_params) do |conn|
+        conn.request :retry, retry_options
+        conn.adapter Faraday.default_adapter
+      end
     end
 
     private
@@ -98,6 +103,17 @@ module QNE
         url: BASE_URI,
         headers: auth_method,
         request: request_options
+      }
+    end
+
+    def retry_options
+      @retry_options ||= {
+        retry_statuses: [401, 409, 500],
+        max: ENV.fetch('MAX_REQUEST_RETRY', '3').to_i, # total request will be made is 4
+        interval: ENV.fetch('INTERVAL_RETRY_NUMBER', '10').to_i, # interval each retry request
+        backoff_factor: 0,
+        exceptions: [Faraday::ResourceNotFound, Faraday::UnauthorizedError, Faraday::TimeoutError, Faraday::ConnectionFailed],
+        retry_block: @retry_block
       }
     end
 

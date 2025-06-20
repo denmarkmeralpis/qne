@@ -30,6 +30,23 @@ then you can use it to perform desired operation
 
 ```ruby
 conn.customers.all(top: 10) # returns top 10 customers
+
+# if you want to have a custom retry_block
+# the retry block will be executed before retry happens
+# for example i have a block for creating logs
+def create_logs
+  puts 'Error Occurred'.
+end
+
+def retry_block
+  proc { create_logs }
+end
+
+# so now when you establish the connection you will
+# pass the block in the qne_connection argument
+# # when farday occur and it reached the first retry
+# the block will be executed
+conn = @integration.qne_connection(retry_block)
 ```
 
 you can also check if the `db_code` is valid:
