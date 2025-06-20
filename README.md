@@ -35,7 +35,7 @@ conn.customers.all(top: 10) # returns top 10 customers
 # the retry block will be executed before retry happens
 # for example i have a block for creating logs
 def create_logs
-  puts 'Error Occured'.
+  puts 'Error Occurred'.
 end
 
 def retry_block
