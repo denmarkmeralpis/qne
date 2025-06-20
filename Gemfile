@@ -11,3 +11,4 @@ gem "rubocop", "~> 1.21"
 gem "faraday-retry", '~> 2.3'
 gem "faraday-net_http_persistent", "~> 2.3"
 gem "net-http-persistent", "~> 4.0"
+gem "byebug"
