@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# require 'faraday'
 require 'faraday/retry'
 require 'faraday/net_http_persistent'
 require_relative 'QNE/version'
