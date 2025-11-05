@@ -3,7 +3,7 @@
 module QNE
   module Term
     class All
-      PATH = '/api/Terms'.freeze
+      PATH = '/api/Terms'
 
       def initialize(conn, params: {})
         @conn = conn

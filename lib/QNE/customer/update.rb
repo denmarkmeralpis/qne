@@ -3,7 +3,7 @@
 module QNE
   module Customer
     class Update
-      PATH = '/api/Customers'.freeze
+      PATH = '/api/Customers'
 
       def initialize(conn, request_body:)
         @conn = conn

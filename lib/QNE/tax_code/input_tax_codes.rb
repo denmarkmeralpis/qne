@@ -3,7 +3,7 @@
 module QNE
   module TaxCode
     class InputTaxCodes
-      PATH = '/api/TaxCodes/InputTaxCodes'.freeze
+      PATH = '/api/TaxCodes/InputTaxCodes'
 
       def initialize(conn, params: {})
         @conn = conn

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'webmock/rspec'
 
@@ -9,20 +11,20 @@ module QNE
         let(:qne) { described_class.new(conn.connection, request_body: body) }
         let(:body) do
           {
-            companyName: "DEN - (ABELLA NAGA CITY)",
-            companyName2: "DEN IBARRA",
-            controlAccount: "11301-000-0000",
-            category: "T2 SARI-SARI",
-            address1: "AL3 ABELLA NAGA CITY CAMARINES SUR",
-            address2: "ABELLA",
-            address3: "NAGA CITY/CAMARINES SUR",
-            contactPerson: "DEN IBARRA",
-            email: "",
-            phoneNo1: "09123456789",
-            businessNature: "SARI-SARI STORE",
-            area: "NAGA CITY",
-            defaultTaxCode: "SR-SP",
-            status: "ACTIVE"
+            companyName: 'DEN - (ABELLA NAGA CITY)',
+            companyName2: 'DEN IBARRA',
+            controlAccount: '11301-000-0000',
+            category: 'T2 SARI-SARI',
+            address1: 'AL3 ABELLA NAGA CITY CAMARINES SUR',
+            address2: 'ABELLA',
+            address3: 'NAGA CITY/CAMARINES SUR',
+            contactPerson: 'DEN IBARRA',
+            email: '',
+            phoneNo1: '09123456789',
+            businessNature: 'SARI-SARI STORE',
+            area: 'NAGA CITY',
+            defaultTaxCode: 'SR-SP',
+            status: 'ACTIVE'
           }
         end
 

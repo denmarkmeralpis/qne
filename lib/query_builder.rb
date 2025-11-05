@@ -5,10 +5,10 @@ module QNE
     OPERATORS = {
       eq: {
         string: "COLUMN OPERATOR 'VALUE'",
-        default: "COLUMN OPERATOR VALUE",
+        default: 'COLUMN OPERATOR VALUE'
       },
       in: {
-        default: "COLUMN OPERATOR (VALUE)"
+        default: 'COLUMN OPERATOR (VALUE)'
       }
     }.freeze
 

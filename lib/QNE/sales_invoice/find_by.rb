@@ -3,7 +3,7 @@
 module QNE
   module SalesInvoice
     class FindBy
-      PATH = '/api/SalesInvoices'.freeze
+      PATH = '/api/SalesInvoices'
 
       def initialize(conn, params:)
         @conn = conn

@@ -4,7 +4,7 @@ module QNE
   class DefaultTaxCode < Base
     include ::QNE::QueryBuilder
 
-    PATH = '/api/DefaultTaxCodes/OutputTaxCode'.freeze
+    PATH = '/api/DefaultTaxCodes/OutputTaxCode'
 
     def call
       @response = conn.get(PATH)

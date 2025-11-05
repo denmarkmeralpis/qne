@@ -16,7 +16,7 @@ require_relative 'users'
 
 module QNE
   class Connection
-    BASE_URI = 'https://dev-api.qne.cloud'.freeze
+    BASE_URI = 'https://dev-api.qne.cloud'
 
     def initialize(options = {})
       @db_code = options.fetch(:db_code, nil) || ENV['QNE_DB_CODE']

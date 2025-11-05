@@ -3,7 +3,7 @@
 module QNE
   module SalesInvoice
     class Update
-      PATH = '/api/SalesInvoices'.freeze
+      PATH = '/api/SalesInvoices'
 
       def initialize(conn, request_body:)
         @conn = conn

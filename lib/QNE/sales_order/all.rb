@@ -3,7 +3,7 @@
 module QNE
   module SalesOrder
     class All
-      PATH = '/api/SalesOrders'.freeze
+      PATH = '/api/SalesOrders'
 
       def initialize(conn, params: {})
         @conn = conn

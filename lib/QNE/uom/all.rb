@@ -3,7 +3,7 @@
 module QNE
   module UOM
     class All
-      PATH = '/api/UOMs'.freeze
+      PATH = '/api/UOMs'
 
       def initialize(conn, params: {})
         @conn = conn
