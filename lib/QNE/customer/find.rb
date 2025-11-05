@@ -3,7 +3,7 @@
 module QNE
   module Customer
     class Find
-      PATH = '/api/Customers/:id'.freeze
+      PATH = '/api/Customers/:id'
 
       def initialize(conn, id:)
         @conn = conn

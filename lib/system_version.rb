@@ -2,7 +2,7 @@
 
 module QNE
   class SystemVersion < Base
-    PATH = '/api/System/Version'.freeze
+    PATH = '/api/System/Version'
 
     def call
       @response = conn.get(PATH)

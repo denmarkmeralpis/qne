@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'webmock/rspec'
 
@@ -9,38 +11,38 @@ module QNE
         let(:qne) { described_class.new(conn.connection, request_body: body) }
         let(:body) do
           {
-            address1: "Zone 2, San Antonio, MILAOR, CAMARINES SUR",
-            address2: "San Antonio/MILAOR",
-            address3: "CAMARINES SUR",
-            attention: "John Doe",
-            customer: "xxxxxxxxxx",
+            address1: 'Zone 2, San Antonio, MILAOR, CAMARINES SUR',
+            address2: 'San Antonio/MILAOR',
+            address3: 'CAMARINES SUR',
+            attention: 'John Doe',
+            customer: 'xxxxxxxxxx',
             details: [
               {
-                dateRef1: "2023-06-07T01:19:37.167Z",
-                description: "Product X",
-                numbering: "1",
-                project: "PROJECT A",
+                dateRef1: '2023-06-07T01:19:37.167Z',
+                description: 'Product X',
+                numbering: '1',
+                project: 'PROJECT A',
                 qty: 5,
-                stock: "9999",
-                stockLocation: "LOCATION_CODE",
-                unitPrice: "17.5",
-                uom: "piece"
+                stock: '9999',
+                stockLocation: 'LOCATION_CODE',
+                unitPrice: '17.5',
+                uom: 'piece'
               }
             ],
-            doAddress1: "Zone 2, San Antonio, MILAOR, CAMARINES SUR",
-            doAddress2: "San Antonio/MILAOR",
-            doAddress3: "CAMARINES SUR",
-            doContact: "John Doe",
-            doPhone: "09999999999",
-            invoiceDate: "2023-06-07T01:19:37.167Z",
-            invoiceTo: "Doe Store",
-            phone: "09999999999",
-            project: "PROJECT A",
-            referenceNo: "R9999-9-9",
-            remark1: "PM1",
-            stockLocation: "LOCATION CODE",
-            title: "PICKER NAME",
-            title2: "CHECKER NAME"
+            doAddress1: 'Zone 2, San Antonio, MILAOR, CAMARINES SUR',
+            doAddress2: 'San Antonio/MILAOR',
+            doAddress3: 'CAMARINES SUR',
+            doContact: 'John Doe',
+            doPhone: '09999999999',
+            invoiceDate: '2023-06-07T01:19:37.167Z',
+            invoiceTo: 'Doe Store',
+            phone: '09999999999',
+            project: 'PROJECT A',
+            referenceNo: 'R9999-9-9',
+            remark1: 'PM1',
+            stockLocation: 'LOCATION CODE',
+            title: 'PICKER NAME',
+            title2: 'CHECKER NAME'
           }
         end
 

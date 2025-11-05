@@ -16,7 +16,7 @@ require_relative 'users'
 
 module QNE
   class Connection
-    BASE_URI = 'https://dev-api.qne.cloud'.freeze
+    BASE_URI = 'https://dev-api.qne.cloud'
 
     # You can provide your own block before executing retry function
     def initialize(options = {}, &retry_block)

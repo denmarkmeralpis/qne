@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 module QNE
@@ -7,7 +9,7 @@ module QNE
     describe '#find_uoms_by_id' do
       before do
         mock = instance_double(QNE::Stock::UOMs)
-        resp = OpenStruct.new(body: '{}')
+        resp = double(body: '{}')
 
         allow(QNE::Stock::UOMs).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
@@ -21,7 +23,7 @@ module QNE
     describe '#all' do
       before do
         mock = instance_double(QNE::Stock::All)
-        resp = OpenStruct.new(body: '[]')
+        resp = double(body: '[]')
 
         allow(QNE::Stock::All).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)

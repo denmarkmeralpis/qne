@@ -3,7 +3,7 @@
 module QNE
   module User
     class Login
-      PATH = '/api/Users/Login'.freeze
+      PATH = '/api/Users/Login'
 
       def initialize(conn, params: {})
         @conn = conn

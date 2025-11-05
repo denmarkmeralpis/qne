@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'webmock/rspec'
 
@@ -9,35 +11,35 @@ module QNE
         let(:qne) { described_class.new(conn.connection, request_body: body) }
         let(:body) do
           {
-            address1: "Zone 2, San Antonio, MILAOR, CAMARINES SUR",
-            address2: "San Antonio/MILAOR",
-            address3: "CAMARINES SUR",
-            attention: "John Doe",
-            customer: "11301-A0001287",
-            customerName: "John sari-sari store - (San Antonio - MILAOR)",
+            address1: 'Zone 2, San Antonio, MILAOR, CAMARINES SUR',
+            address2: 'San Antonio/MILAOR',
+            address3: 'CAMARINES SUR',
+            attention: 'John Doe',
+            customer: '11301-A0001287',
+            customerName: 'John sari-sari store - (San Antonio - MILAOR)',
             details: [
               {
-                description: "ACTIVEX DUO WHITE FRESH BLUE ANTI GERM 60GX162",
-                qty: "5",
-                stock: "495992",
-                unitPrice: "17.5",
-                uom: "piece"
+                description: 'ACTIVEX DUO WHITE FRESH BLUE ANTI GERM 60GX162',
+                qty: '5',
+                stock: '495992',
+                unitPrice: '17.5',
+                uom: 'piece'
               }
             ],
-            doAddress1: "Zone 2, San Antonio, MILAOR, CAMARINES SUR",
-            doAddress2: "San Antonio/MILAOR",
-            doAddress3: "CAMARINES SUR",
-            doContact: "John Doe",
-            doPhone: "099999999",
+            doAddress1: 'Zone 2, San Antonio, MILAOR, CAMARINES SUR',
+            doAddress2: 'San Antonio/MILAOR',
+            doAddress3: 'CAMARINES SUR',
+            doContact: 'John Doe',
+            doPhone: '099999999',
             isApproved: true,
             isCancelled: false,
             isTaxInclusive: true,
-            orderDate: "2023-06-01T01:19:37.167Z",
-            phone: "099999999",
-            referenceNo: "R34131-1-5",
-            remark1: "",
-            project: "NAGA ADMIN",
-            stockLocation: "AL"
+            orderDate: '2023-06-01T01:19:37.167Z',
+            phone: '099999999',
+            referenceNo: 'R34131-1-5',
+            remark1: '',
+            project: 'NAGA ADMIN',
+            stockLocation: 'AL'
           }
         end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 module QNE
@@ -7,7 +9,7 @@ module QNE
     describe '#all' do
       before do
         mock = instance_double(QNE::Term::All)
-        resp = OpenStruct.new(body: '[]')
+        resp = double(body: '[]')
 
         allow(QNE::Term::All).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
@@ -21,7 +23,7 @@ module QNE
     describe '#show' do
       before do
         mock = instance_double(QNE::Term::Show)
-        resp = OpenStruct.new(body: '{}')
+        resp = double(body: '{}')
 
         allow(QNE::Term::Show).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
