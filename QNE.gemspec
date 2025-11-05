@@ -22,9 +22,8 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.add_dependency 'faraday', '~> 1.10'
-  spec.add_dependency 'faraday-net_http_persistent', '~> 1.2'
-  spec.add_dependency 'net-http-persistent', '~> 4.0'
-  spec.add_development_dependency 'webmock', '~> 3.4'
-  spec.add_development_dependency 'byebug'
+  spec.add_dependency 'faraday', '>= 1.10'
+  spec.add_dependency 'faraday-net_http_persistent', '>= 1.2'
+  spec.add_dependency 'net-http-persistent', '>= 4.0'
+  spec.add_development_dependency 'webmock', '>= 3.4'
 end
