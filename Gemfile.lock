@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    QNE (0.4.1)
+    QNE (0.5.1)
       faraday (>= 1.10)
       faraday-net_http_persistent (>= 1.2)
+      faraday-retry
       net-http-persistent (>= 4.0)
 
 GEM
