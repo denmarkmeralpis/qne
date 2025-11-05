@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'byebug'
 
 module QNE
   RSpec.describe Customers do
@@ -8,7 +7,7 @@ module QNE
     describe '#all' do
       before do
         mock = instance_double(QNE::Customer::All)
-        resp = OpenStruct.new(body: '[]')
+        resp = double(body: '[]')
 
         allow(QNE::Customer::All).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
@@ -23,7 +22,7 @@ module QNE
       context 'with data' do
         before do
           mock = instance_double(QNE::Customer::FindBy)
-          resp = OpenStruct.new(body: { id: '123' }.to_json, success: true)
+          resp = double(body: [{ id: '123' }].to_json, success?: true)
 
           allow(QNE::Customer::FindBy).to receive(:new).and_return(mock)
           allow(mock).to receive(:call).and_return(resp)
@@ -37,7 +36,7 @@ module QNE
       context 'without data' do
         before do
           mock = instance_double(QNE::Customer::FindBy)
-          resp = OpenStruct.new(body: '[]', success?: true)
+          resp = double(body: '[]', success?: true)
 
           allow(QNE::Customer::FindBy).to receive(:new).and_return(mock)
           allow(mock).to receive(:call).and_return(resp)
@@ -52,7 +51,7 @@ module QNE
     describe '#create' do
       before do
         mock = instance_double(QNE::Customer::Create)
-        resp = OpenStruct.new(body: { id: '123' }.to_json)
+        resp = double(body: { id: '123' }.to_json)
 
         allow(QNE::Customer::Create).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
@@ -66,7 +65,7 @@ module QNE
     describe '#show' do
       before do
         mock = instance_double(QNE::Customer::Show)
-        resp = OpenStruct.new(body: '{}')
+        resp = double(body: '{}')
 
         allow(QNE::Customer::Show).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
@@ -80,7 +79,7 @@ module QNE
     describe '#update' do
       before do
         mock = instance_double(QNE::Customer::Update)
-        resp = OpenStruct.new(body: '{}')
+        resp = double(body: '{}')
 
         allow(QNE::Customer::Update).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)

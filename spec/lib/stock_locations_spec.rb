@@ -7,7 +7,7 @@ module QNE
     describe '#all' do
       before do
         mock = instance_double(QNE::Stock::All)
-        resp = OpenStruct.new(body: '[]')
+        resp = double(body: '[]')
 
         allow(QNE::Stock::All).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)

@@ -7,7 +7,7 @@ module QNE
     describe '#all' do
       before do
         mock = instance_double(QNE::SalesOrder::All)
-        resp = OpenStruct.new(body: '[{}]')
+        resp = double(body: '[{}]')
 
         allow(QNE::SalesOrder::All).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
@@ -21,7 +21,7 @@ module QNE
     describe '#show' do
       before do
         mock = instance_double(QNE::SalesOrder::Show)
-        resp = OpenStruct.new(body: '{}')
+        resp = double(body: '{}')
 
         allow(QNE::SalesOrder::Show).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
@@ -35,7 +35,7 @@ module QNE
     describe '#create' do
       before do
         mock = instance_double(QNE::SalesOrder::Create)
-        resp = OpenStruct.new(body: { id: '123' }.to_json)
+        resp = double(body: { id: '123' }.to_json)
 
         allow(QNE::SalesOrder::Create).to receive(:new).and_return(mock)
         allow(mock).to receive(:call).and_return(resp)
