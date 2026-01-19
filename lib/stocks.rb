@@ -3,6 +3,7 @@
 require_relative 'QNE/stock/all'
 require_relative 'QNE/stock/uoms'
 require_relative 'QNE/stock/find'
+require_relative 'QNE/stock/available'
 
 module QNE
   class Stocks < Base
@@ -37,6 +38,14 @@ module QNE
     def find_uoms_by_id(id)
       @response = QNE::Stock::UOMs.new(
         conn, id: id
+      ).call
+
+      parse_to_json(@response.body)
+    end
+
+    def find_stocks_available_by_stock_code(stock_code)
+      @response = QNE::Stock::Available.new(
+        conn, stock_code: stock_code
       ).call
 
       parse_to_json(@response.body)
