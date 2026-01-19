@@ -33,5 +33,19 @@ module QNE
         expect(conn.stocks.all).to be_a(Array)
       end
     end
+
+    describe '#find_stocks_available_by_stock_code' do
+      before do
+        mock = instance_double(QNE::Stock::Available)
+        resp = double(body: '{}')
+
+        allow(QNE::Stock::Available).to receive(:new).and_return(mock)
+        allow(mock).to receive(:call).and_return(resp)
+      end
+
+      it 'returns a Hash' do
+        expect(conn.stocks.find_stocks_available_by_stock_code('sku1')).to be_a(Hash)
+      end
+    end
   end
 end
