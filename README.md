@@ -366,6 +366,12 @@ stock = conn.stocks.find('stock-id')
 stock.show
 ```
 
+**4. Fetch specific stock available using stock_code**
+
+```ruby
+stock = conn.stocks.find_stocks_available_by_stock_code('stock_code')
+```
+
 ### Stock Locations
 
 **1. Fetch all stock locations**
