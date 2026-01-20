@@ -5,12 +5,17 @@ module QNE
     class All
       PATH = '/api/StockLocation'
 
-      def initialize(conn)
+      def initialize(conn, params: {})
         @conn = conn
+        @params = params
       end
 
       def call
-        @conn.get(PATH)
+        @conn.get(PATH) do |req|
+          @params.each do |key, val|
+            req.params[key] = val
+          end
+        end
       end
     end
   end
