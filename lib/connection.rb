@@ -7,6 +7,7 @@ require_relative 'default_tax_code'
 require_relative 'sales_invoices'
 require_relative 'sales_orders'
 require_relative 'stocks'
+require_relative 'stock_reports'
 require_relative 'stock_locations'
 require_relative 'system_version'
 require_relative 'terms'
@@ -55,6 +56,10 @@ module QNE
 
     def stocks
       @stocks ||= QNE::Stocks.new(connection)
+    end
+
+    def stock_reports
+      @stock_reports ||= QNE::StockReports.new(connection)
     end
 
     def terms
