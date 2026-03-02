@@ -382,6 +382,18 @@ conn.stock_locations.all
 
 _Note: `filters` and `queries` won't work for this specific action._
 
+### Stock Reports
+
+**1. Fetch all stocks reports available balance by date**
+
+```ruby
+conn.stock_reports.find_stocks_location_balance_by_date
+```
+
+```ruby
+conn.stock_reports.find_stocks_location_balance_by_date(as_of_date: Time.current)
+```
+
 ### Terms
 
 **1. Fetch all terms**
