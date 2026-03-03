@@ -391,7 +391,7 @@ conn.stock_reports.find_stocks_location_balance_by_date
 ```
 
 ```ruby
-conn.stock_reports.find_stocks_location_balance_by_date(as_of_date: Time.current)
+conn.stock_reports.find_stocks_location_balance_by_date(as_of_date: Time.current, stock_location: 'AL')
 ```
 
 ### Terms
