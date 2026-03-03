@@ -16,7 +16,9 @@ module QNE
       end
 
       it 'returns a Hash' do
-        expect(conn.stock_reports.find_stocks_location_balance_by_date(as_of_date: Date.today)).to be_a(Hash)
+        expect(conn.stock_reports.find_stocks_location_balance_by_date(
+                 as_of_date: Date.today, stock_location: 'AL'
+               )).to be_a(Hash)
       end
     end
   end
