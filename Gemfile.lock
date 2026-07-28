@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    QNE (0.7.1)
+    QNE (0.7.2)
       faraday (>= 1.10)
       faraday-net_http_persistent (>= 1.2)
       faraday-retry
