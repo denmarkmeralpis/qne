@@ -3,6 +3,7 @@
 require_relative 'agents'
 require_relative 'customers'
 require_relative 'customer_categories'
+require_relative 'customer_receipts'
 require_relative 'default_tax_code'
 require_relative 'sales_invoices'
 require_relative 'sales_orders'
@@ -39,6 +40,10 @@ module QNE
 
     def customer_categories
       @customer_categories ||= QNE::CustomerCategories.new(connection)
+    end
+
+    def customer_receipts
+      @customer_receipts ||= QNE::CustomerReceipts.new(connection)
     end
 
     def default_tax_code
