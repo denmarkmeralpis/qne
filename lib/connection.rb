@@ -148,4 +148,3 @@ module QNE
   end
 end
 # rubocop:enable Metrics/ClassLength
-
