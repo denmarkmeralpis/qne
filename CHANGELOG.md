@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-09-29
+
+- Support connecting to a local QNE server: `Connection` now accepts `app_port` and `proxy` options, and when both are set, requests go to `<proxy>:<app_port>` instead of the cloud `BASE_URI` (an `http://` scheme is added when the proxy has none, and trailing slashes are removed)
+- Bump regexp_parser, unicode-display_width, and unicode-emoji dependency versions
+
+## [0.8.0] - 2026-09-16
+
+- Add Customer Receipts resource (`Connection#customer_receipts`) with a `create` method that posts to `/api/CustomerReceipts`
+- Bump bigdecimal, faraday, json (2.x → 3.x), parallel, rubocop, and webmock dependency versions
+
 ## [0.7.2] - 2026-07-28
 
 - Bump json, parser, and rubocop dependency versions
