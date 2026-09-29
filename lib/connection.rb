@@ -16,6 +16,7 @@ require_relative 'uoms'
 require_relative 'tax_codes'
 require_relative 'users'
 
+# rubocop:disable Metrics/ClassLength
 module QNE
   class Connection
     BASE_URI = 'https://dev-api.qne.cloud'
@@ -24,6 +25,7 @@ module QNE
     def initialize(options = {}, &retry_block)
       @db_code = options.fetch(:db_code, nil) || ENV['QNE_DB_CODE']
       @api_token = options.fetch(:api_token, nil)
+      @app_port, @proxy = options.values_at(:app_port, :proxy)
       @retry_block = retry_block
     end
 
@@ -84,7 +86,7 @@ module QNE
     end
 
     def users
-      @users ||= QNE::Users.new(Faraday.new(url: BASE_URI))
+      @users ||= QNE::Users.new(Faraday.new(url: base_uri))
     end
 
     def connected?
@@ -110,10 +112,18 @@ module QNE
 
     def faraday_params
       @faraday_params ||= {
-        url: BASE_URI,
+        url: base_uri,
         headers: auth_method,
         request: request_options
       }
+    end
+
+    def base_uri
+      return BASE_URI if @app_port.to_s.strip.empty? || @proxy.to_s.strip.empty?
+
+      proxy = @proxy.to_s.strip.sub(%r{/*\z}, '').sub(%r{\A(?!https?://)}i, 'http://')
+
+      "#{proxy}:#{@app_port}"
     end
 
     def retry_options
@@ -147,3 +157,4 @@ module QNE
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

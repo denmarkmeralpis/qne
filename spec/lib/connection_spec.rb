@@ -4,6 +4,34 @@ require 'spec_helper'
 
 module QNE
   RSpec.describe Connection do
+    describe '#connection' do
+      it 'uses the cloud base uri by default' do
+        conn = described_class.new(db_code: 'QNEDBCODE')
+
+        expect(conn.connection.url_prefix.to_s).to eq("#{described_class::BASE_URI}/")
+      end
+
+      it 'uses the proxy and app port as the base uri' do
+        conn = described_class.new(
+          db_code: 'QNEDBCODE',
+          proxy: '38.60.245.92',
+          app_port: '8080'
+        )
+
+        expect(conn.connection.url_prefix.to_s).to eq('http://38.60.245.92:8080/')
+      end
+
+      it 'uses the cloud base uri when app port is blank' do
+        conn = described_class.new(
+          db_code: 'QNEDBCODE',
+          proxy: '38.60.245.92',
+          app_port: ''
+        )
+
+        expect(conn.connection.url_prefix.to_s).to eq("#{described_class::BASE_URI}/")
+      end
+    end
+
     describe '#customers' do
       context 'when no errors occur' do
         let(:conn) { described_class.new(db_code: 'QNEDBCODE') }
