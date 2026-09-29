@@ -22,6 +22,8 @@ module QNE
     def initialize(options = {}, &retry_block)
       @db_code = options.fetch(:db_code, nil) || ENV['QNE_DB_CODE']
       @api_token = options.fetch(:api_token, nil)
+      @app_port = options.fetch(:app_port, nil)
+      @proxy = options.fetch(:proxy, nil)
       @retry_block = retry_block
     end
 
@@ -74,7 +76,7 @@ module QNE
     end
 
     def users
-      @users ||= QNE::Users.new(Faraday.new(url: BASE_URI))
+      @users ||= QNE::Users.new(Faraday.new(url: base_uri))
     end
 
     def connected?
@@ -100,10 +102,23 @@ module QNE
 
     def faraday_params
       @faraday_params ||= {
-        url: BASE_URI,
+        url: base_uri,
         headers: auth_method,
         request: request_options
       }
+    end
+
+    def base_uri
+      return BASE_URI unless present?(@app_port) && present?(@proxy)
+
+      proxy = @proxy.to_s.strip.sub(%r{/*\z}, '')
+      proxy = "http://#{proxy}" unless proxy.match?(%r{\Ahttps?://}i)
+
+      "#{proxy}:#{@app_port}"
+    end
+
+    def present?(value)
+      !value.to_s.strip.empty?
     end
 
     def retry_options
