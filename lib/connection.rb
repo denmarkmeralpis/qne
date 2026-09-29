@@ -22,8 +22,7 @@ module QNE
     def initialize(options = {}, &retry_block)
       @db_code = options.fetch(:db_code, nil) || ENV['QNE_DB_CODE']
       @api_token = options.fetch(:api_token, nil)
-      @app_port = options.fetch(:app_port, nil)
-      @proxy = options.fetch(:proxy, nil)
+      @app_port, @proxy = options.values_at(:app_port, :proxy)
       @retry_block = retry_block
     end
 
@@ -109,16 +108,11 @@ module QNE
     end
 
     def base_uri
-      return BASE_URI unless present?(@app_port) && present?(@proxy)
+      return BASE_URI if @app_port.to_s.strip.empty? || @proxy.to_s.strip.empty?
 
-      proxy = @proxy.to_s.strip.sub(%r{/*\z}, '')
-      proxy = "http://#{proxy}" unless proxy.match?(%r{\Ahttps?://}i)
+      proxy = @proxy.to_s.strip.sub(%r{/*\z}, '').sub(%r{\A(?!https?://)}i, 'http://')
 
       "#{proxy}:#{@app_port}"
-    end
-
-    def present?(value)
-      !value.to_s.strip.empty?
     end
 
     def retry_options
