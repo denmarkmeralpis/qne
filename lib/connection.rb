@@ -14,6 +14,7 @@ require_relative 'uoms'
 require_relative 'tax_codes'
 require_relative 'users'
 
+# rubocop:disable Metrics/ClassLength
 module QNE
   class Connection
     BASE_URI = 'https://dev-api.qne.cloud'
@@ -146,4 +147,5 @@ module QNE
     end
   end
 end
+# rubocop:enable Metrics/ClassLength
 
